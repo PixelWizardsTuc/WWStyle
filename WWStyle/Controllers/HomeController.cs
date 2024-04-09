@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WWStyle.Models;
 
+
 namespace WWStyle.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        //private readonly WWStyleContext db;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -15,6 +17,10 @@ namespace WWStyle.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogError("This is a serious error...");
+            _logger.LogWarning("This is the first warning...");
+            _logger.LogWarning("This is the second warning..");
+            _logger.LogInformation("I am in the Index method of the HomeController");
             return View();
         }
 
