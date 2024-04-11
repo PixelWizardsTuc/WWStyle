@@ -28,22 +28,22 @@ namespace WWStyle.Controllers
             return View(product);
         }
 
-		public async Task<IActionResult> ProductDetail(int? id, string alertstyle = "success")
-		{
-			ViewData["alertstyle"] = alertstyle;
+		//public async Task<IActionResult> ProductDetail(int? id, string alertstyle = "success")
+		//{
+		//	ViewData["alertstyle"] = alertstyle;
 
-			if (!id.HasValue)
-			{
-				return BadRequest("You must pass a product ID in the route, " +
-					"for example, /Home/ProductDetail/13");
-			}
-			Product? model = await _context.Products.SingleOrDefaultAsync(p => p.ProductId == id);
-			if (model is null)
-			{
-				return NotFound($"ProductId {id} not found.");
-			}
-			return View(model);
-		}
+		//	if (!id.HasValue)
+		//	{
+		//		return BadRequest("You must pass a product ID in the route, " +
+		//			"for example, /Home/ProductDetail/13");
+		//	}
+		//	Product? model = await _context.Products.SingleOrDefaultAsync(p => p.ProductId == id);
+		//	if (model is null)
+		//	{
+		//		return NotFound($"ProductId {id} not found.");
+		//	}
+		//	return View(model);
+		//}
 
         public IActionResult Detail(int id)
         {
