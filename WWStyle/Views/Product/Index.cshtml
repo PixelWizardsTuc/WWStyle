@@ -14,10 +14,10 @@
                             <p class="card-text">@product.Description.</p>
                             <div class="d-flex justify-content-between align-products-center">
                                 <div class="btn-group">
-                                    <a asp-controller="Club" asp-action="Detail" asp-route-id="@product.ProductId" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.ProductId" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                 </div>
-                                <small class="text-muted">@product.Price</small>
+                                <small class="text-muted">@product.Price $</small>
                             </div>
                         </div>
                     </div>

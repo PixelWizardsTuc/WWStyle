@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using WWStyle.Data;
+using WWStyle.Models;
 
 namespace WWStyle;
 
