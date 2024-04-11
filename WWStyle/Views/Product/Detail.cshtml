@@ -15,6 +15,7 @@
                             <span>$@Model.Price</span>
                         </div>
                         <p class="lead">@Model.Description</p>
+                          <p class="lead">In stock: @Model.Stock</p>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">
 
@@ -22,6 +23,7 @@
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>
+                            
                         </div>
                     </div>
                 </div>
@@ -31,7 +33,7 @@
     </svg>
     Back
 </button>
-<script src="~/js/site.js"></script>
+
 @if (Model.Comments != null && Model.Comments.Any())
 {
     <h3>Comments</h3>
@@ -63,3 +65,4 @@ else
         Submit
     </button>
 </form>
+<script src="~/js/site.js"></script>
