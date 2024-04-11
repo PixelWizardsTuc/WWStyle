@@ -22,11 +22,11 @@ namespace WWStyle.Controllers
 
         }
 
-        public IActionResult Details(int id)
-        {
-            Product product = _context.Products.Include(p => p.ProductName).FirstOrDefault(i => i.ProductId == id);
-            return View(product);
-        }
+        //public IActionResult Details(int id)
+        //{
+        //    Product product = _context.Products.Include(p => p.ProductName).FirstOrDefault(i => i.ProductId == id);
+        //    return View(product);
+        //}
 
 		//public async Task<IActionResult> ProductDetail(int? id, string alertstyle = "success")
 		//{
@@ -54,6 +54,35 @@ namespace WWStyle.Controllers
             }
             return View(product);
         }
+
+        //[HttpPost]
+        //public IActionResult AddComment(int productId, string userName, string commentText)
+        //{
+        //    // Hämta produkten från databasen
+        //    var product = _context.Products.Include(p => p.Comments).FirstOrDefault(p => p.ProductId == productId);
+
+        //    if (product != null)
+        //    {
+        //        // Skapa en ny kommentar
+        //        var comment = new Comment
+        //        {
+        //            UserId = userName,
+        //            Text = commentText,
+        //            CreateDate = DateTime.Now
+        //        };
+
+        //        // Lägg till kommentaren till produktens kommentarer
+        //        product.Comments.Add(comment);
+
+        //        // Spara ändringarna till databasen
+        //        _context.SaveChanges();
+
+        //        // Omdirigera tillbaka till produktsidan
+        //        return RedirectToAction("Detail", new { id = productId });
+        //    }
+
+        //    return NotFound();
+        //}
         // Andra action-metoder för att hantera skapande, redigering och borttagning av produkter
         // Exempelvis:
         // public IActionResult Create()
