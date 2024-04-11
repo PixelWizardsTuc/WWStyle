@@ -7,11 +7,11 @@
             @foreach (var product in Model)
             {
                 <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="@product.Picture" alt="Card image cap">
+                    <div class="card mb-4 box-shadow" >
+                        <img class="card-img-top"  src="@product.Picture" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">@product.ProductName.</p>
-                            <p class="card-text">@product.Description.</p>
+                            <p class="card-text">@product.Description.</p> <!--d-inline-block text-truncate" style="max-width: 150px" //lägg till detta i classen för att minska text till ... (funkar endast på små enheter än sålänge)-->
                             <div class="d-flex justify-content-between align-products-center">
                                 <div class="btn-group">
                                     <a asp-controller="Product" asp-action="Detail" asp-route-id="@product.ProductId" type="button" class="btn btn-sm btn-outline-secondary">View</a>
