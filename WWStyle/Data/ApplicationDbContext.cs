@@ -9,5 +9,7 @@ namespace WWStyle.Data
             : base(options)
         {
         }
+
+        public object AspNetUsers { get; internal set; }
     }
 }

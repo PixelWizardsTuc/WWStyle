@@ -34,6 +34,7 @@
     Back
 </button>
 
+
 @if (Model.Comments != null && Model.Comments.Any())
 {
     <h3>Comments</h3>
@@ -51,6 +52,7 @@ else
 <!-- Formulär för att lägga till en ny kommentar -->
 <h3>Add a comment</h3>
 <form style="margin-bottom: 100px" id="commentForm" method="post" action="/Product/AddComment">
+    @Html.AntiForgeryToken()
     <input type="hidden" name="productId" value="@Model.ProductId" />
     <div class="form-group">
         <label for="userName">Name:</label>
@@ -65,4 +67,26 @@ else
         Submit
     </button>
 </form>
-<script src="~/js/site.js"></script>
+
+<!-- Skript för att ladda om sidan efter att en ny kommentar har lagts till -->
+<script>
+    // Lyssna på formulärinskickning
+    $('#commentForm').submit(function (event) {
+        event.preventDefault(); // Förhindra standardformulärinskickning
+
+        // Skicka formulärdata med AJAX
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (response) {
+                // Ladda om sidan efter att kommentaren har lagts till
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+</script>
+

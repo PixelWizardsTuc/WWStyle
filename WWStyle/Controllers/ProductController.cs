@@ -3,16 +3,20 @@ using System.Linq;
 using WWStyle.Data;
 using WWStyle.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace WWStyle.Controllers
 {
     public class ProductController : Controller
     {
         private readonly AspnetWwstyleContext _context;
+        private readonly ApplicationDbContext _appContext;
 
-        public ProductController(AspnetWwstyleContext context)
+
+        public ProductController(AspnetWwstyleContext context, ApplicationDbContext appContext)
         {
             _context = context;
+            _appContext = appContext;
         }
 
         public IActionResult Index()
@@ -55,34 +59,44 @@ namespace WWStyle.Controllers
             return View(product);
         }
 
-        //[HttpPost]
-        //public IActionResult AddComment(int productId, string userName, string commentText)
+        //private AspNetUser GetUserById(string userId)
         //{
-        //    // Hämta produkten från databasen
-        //    var product = _context.Products.Include(p => p.Comments).FirstOrDefault(p => p.ProductId == productId);
+        //    // Hämta användaren från _appContext-databasen
+        //    var user = _appContext.Users.FirstOrDefault(u => u.Id == userId);
 
-        //    if (product != null)
-        //    {
-        //        // Skapa en ny kommentar
-        //        var comment = new Comment
-        //        {
-        //            UserId = userName,
-        //            Text = commentText,
-        //            CreateDate = DateTime.Now
-        //        };
-
-        //        // Lägg till kommentaren till produktens kommentarer
-        //        product.Comments.Add(comment);
-
-        //        // Spara ändringarna till databasen
-        //        _context.SaveChanges();
-
-        //        // Omdirigera tillbaka till produktsidan
-        //        return RedirectToAction("Detail", new { id = productId });
-        //    }
-
-        //    return NotFound();
+        //    return user;
         //}
+
+        [HttpPost]
+        public IActionResult AddComment(int productId, string userName, string commentText)
+        {
+            // Hämta produkten från databasen
+            var product = _context.Products.Include(p => p.Comments).FirstOrDefault(p => p.ProductId == productId);
+
+            if (product != null)
+            {
+                // Skapa en ny kommentar
+                var comment = new Comment
+                {
+                    UserId = userName,
+                    Text = commentText,
+                    CreateDate = DateTime.Now
+                };
+
+                // Lägg till kommentaren till produktens kommentarer
+                product.Comments.Add(comment);
+
+                // Spara ändringarna till databasen
+                _appContext.SaveChanges();
+                _context.SaveChanges();
+
+                // Omdirigera tillbaka till produktsidan
+                return RedirectToAction("Detail", new { id = productId });
+            }
+
+            return NotFound();
+        }
+
         // Andra action-metoder för att hantera skapande, redigering och borttagning av produkter
         // Exempelvis:
         // public IActionResult Create()
