@@ -1,4 +1,4 @@
-﻿@model AspNetUser
+﻿@model WWStyle.AspNetUser
 @{
 
 }
@@ -17,7 +17,8 @@
 
         <div class="d-flex">
             <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+            <a asp-controller="Customer" asp-action="ConfirmDelete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+
         </div>
     </div>
 </div>

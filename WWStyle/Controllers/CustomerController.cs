@@ -35,5 +35,29 @@ namespace WWStyle.Controllers
 
             return View(user);
         }
+
+        public IActionResult ConfirmDelete(string id)
+        {
+            var user = _context.AspNetUsers.FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(string id)
+        {
+            var user = _context.AspNetUsers.FirstOrDefault(u => u.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _context.AspNetUsers.Remove(user);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
