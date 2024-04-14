@@ -1,0 +1,65 @@
+﻿@model WWStyle.Models.ViewModels.AddCustomerViewModel
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Add new Customer</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label mb-0">First Name</label>
+            <input type="text" class="form-control" id="firstName" asp-for="FirstName" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Last Name</label>
+            <input type="text" class="form-control" id="lastName" asp-for="LastName" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Address 1</label>
+            <input type="text" class="form-control" id="address1" asp-for="Address1" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Address 2</label>
+            <input type="text" class="form-control" id="address2" asp-for="Address2" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">City</label>
+            <input type="text" class="form-control" id="city" asp-for="City" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">State</label>
+            <input type="text" class="form-control" id="state" asp-for="State" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Zip Code</label>
+            <input type="text" class="form-control" id="zipCode" asp-for="ZipCode" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Country</label>
+            <input type="text" class="form-control" id="country" asp-for="Country" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Phone</label>
+            <input type="text" class="form-control" id="phone" asp-for="Phone" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Email</label>
+            <input type="text" class="form-control" id="email" asp-for="Email" />
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+</div>

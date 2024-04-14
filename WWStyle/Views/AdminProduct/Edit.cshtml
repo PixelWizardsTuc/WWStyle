@@ -1,0 +1,57 @@
+﻿
+
+@model WWStyle.Product
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Edit Product</h1>
+    </div>
+</div>
+
+
+@if (Model is null)
+{
+    <p>No product was found with this Id</p>
+}
+else
+{
+<div class="container py-5">
+    <form method="post">
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Product Id</label>
+            <input type="text" class="form-control" id="ProductId" asp-for="ProductId" name="ProductId" value="@Model.ProductId" readonly/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Product Name</label>
+            <input type="text" class="form-control" id="ProductName" asp-for="ProductName" name="ProductName" value="@Model.ProductName"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Description</label>
+            <input type="text" class="form-control" id="Description" asp-for="Description" name="Description" value="@Model.Description" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Price</label>
+            <input type="number" class="form-control" id="Price" asp-for="Price" name="Price" value="@Model.Price"/>
+        </div>
+
+        <!--<div class="mb-3">
+            <label class="form-label mb-0">Picture</label>
+            <input type="file" class="form-control" id="picture"/>
+        </div>-->
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Stock</label>
+            <input type="number" class="form-control" id="Stock" asp-for="Stock" name="Stock" value="@Model.Stock"/>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-danger ms-3" asp-action="Delete" asp-controller="AdminProduct">Delete</button>
+        </div>
+    </form>
+</div>
+}

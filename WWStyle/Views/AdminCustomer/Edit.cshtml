@@ -1,0 +1,75 @@
+﻿@model WWStyle.Customer
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Edit Customer</h1>
+    </div>
+</div>
+
+
+@if (Model is null)
+{
+    <p>No customer was found with this Id</p>
+}
+else
+{
+    <div class="container py-5">
+        <form method="post">
+
+            <div class="mb-3">
+                <label class="form-label mb-0">First Name</label>
+                <input type="text" class="form-control" id="firstName" asp-for="FirstName" name="FirstName" value="@Model.FirstName" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">Last Name</label>
+                <input type="text" class="form-control" id="lastName" asp-for="LastName" name="LastName" value="@Model.LastName" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">Address 1</label>
+                <input type="text" class="form-control" id="address1" asp-for="Address1" name="Address1" value="@Model.Address1" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">Address 2</label>
+                <input type="number" class="form-control" id="address2" asp-for="Address2" name="Address2" value="@Model.Address2" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">City</label>
+                <input type="number" class="form-control" id="city" asp-for="City" name="City" value="@Model.City" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">State</label>
+                <input type="number" class="form-control" id="state" asp-for="State" name="State" value="@Model.State" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">Zip Code</label>
+                <input type="number" class="form-control" id="zipCode" asp-for="ZipCode" name="ZipCode" value="@Model.ZipCode" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">Country</label>
+                <input type="number" class="form-control" id="country" asp-for="Country" name="Country" value="@Model.Country" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">Phone</label>
+                <input type="number" class="form-control" id="phone" asp-for="Phone" name="Phone" value="@Model.Phone" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label mb-0">Email</label>
+                <input type="number" class="form-control" id="email" asp-for="Email" name="Email" value="@Model.Email" />
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-danger ms-3" asp-action="Delete" asp-controller="AdminCustomer">Delete</button>
+            </div>
+        </form>
+    </div>
+}

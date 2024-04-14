@@ -1,0 +1,42 @@
+﻿@model WWStyle.Models.ViewModels.AddProductViewModel
+@{
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Add new Product</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label mb-0">Product Name</label>
+            <input type="text" class="form-control" id="productName" asp-for="ProductName"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Description</label>
+            <input type="text" class="form-control" id="description" asp-for="Description"/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Price</label>
+            <input type="number" class="form-control" id="price" asp-for="Price"/>
+        </div>
+
+        <!--<div class="mb-3">
+            <label class="form-label mb-0">Picture</label>
+            <input type="file" class="form-control" id="picture"/>
+        </div>-->
+
+        <div class="mb-3">
+            <label class="form-label mb-0">Stock</label>
+            <input type="number" class="form-control" id="stock" asp-for="Stock"/>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+</div>
