@@ -6,7 +6,10 @@ namespace WWStyle.Models
 {
     public record HomeIndexViewModel
         (
-            IList<Product> Products
+            IList<Product> Products,
+            IList<Customer> Customers,
+            IList<AspNetUser> AspNetUsers,
+            IList<Comment> Comments
         );
     
 }

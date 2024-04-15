@@ -17,7 +17,9 @@
 
         <div class="d-flex">
             <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-            <a asp-controller="Customer" asp-action="ConfirmDelete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+            <a asp-controller="Customer" asp-action="ConfirmDelete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash"></i>
+                Delete</a>
 
         </div>
     </div>

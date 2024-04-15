@@ -2,9 +2,9 @@
 
 <h1>Products</h1>
 
-<a class="btn btn-primary" asp-controller="AdminProduct" asp-action="Add">Add product</a>
+<a class="btn btn-outline-dark flex-shrink-0" asp-controller="AdminProduct" asp-action="Add">Add product</a>
 
-<table class="table">
+<table class="table" style="margin-bottom: 100px;">
     <thead>
         <tr>
             <th>Product Id</th>
@@ -28,7 +28,7 @@
                 <td>@product.Price</td>
                 <td>@product.Stock</td>
                 <td>
-                    <a class="btn btn-primary" asp-controller="AdminProduct" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
+                    <a class="btn btn-outline-dark flex-shrink-0" asp-controller="AdminProduct" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
                 </td>
             </tr>
         }
