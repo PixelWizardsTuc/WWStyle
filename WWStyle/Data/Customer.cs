@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using WWStyle.Data;
 
 namespace WWStyle;
 
 public partial class Customer
 {
-    public string Id { get; set; } = null!;
+    public string CustomerId { get; set; } = null!;
 
     public string FirstName { get; set; } = null!;
 
@@ -28,7 +29,7 @@ public partial class Customer
 
     public string? Email { get; set; }
 
-    public virtual AspNetUser IdNavigation { get; set; } = null!;
+    public virtual AspNetUser Id { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 

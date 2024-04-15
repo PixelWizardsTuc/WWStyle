@@ -40,7 +40,7 @@ public partial class AspnetWwstyleContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
-    //kontrollera din connection string emil!!!!!!!!!!!!!!!<<<<<<<<<<<<<<<<<<<<<<<
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=aspnet-WWStyle-f5351729-eff6-4dcb-986c-94d4f8623a29;Trusted_Connection=True;");
@@ -152,8 +152,8 @@ public partial class AspnetWwstyleContext : DbContext
             entity.Property(e => e.State).HasMaxLength(100);
             entity.Property(e => e.ZipCode).HasMaxLength(20);
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.Customer)
-                .HasForeignKey<Customer>(d => d.Id)
+            entity.HasOne(d => d.Id).WithOne(p => p.Customer)
+                .HasForeignKey<Customer>(d => d.CustomerId)
                 .HasConstraintName("FK_Customers_AspNetUsers");
         });
 
