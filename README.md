@@ -63,8 +63,8 @@ Press “Submit” to add your comment. The comment will stay on the detail site
 * Program.cs: Configures and builts the ASP.NET MVC web application with built in authorization from the Identity framework. 
 * Imports necessary namespaces for Identity, Entity Framework Core and configuration.
 * Creates an instance of WebApplication with help of WebApplicationBuilder.
-*Configures services that are used in the application, this includes settings for database connections and uses Entity Framework Core to handle database operations.
-*Configuration of authentication and authorization settings with the help of ASP.NET Identity, this includes requirements of confirmed userprofile upon logging in. 
+* Configures services that are used in the application, this includes settings for database connections and uses Entity Framework Core to handle database operations.
+* Configuration of authentication and authorization settings with the help of ASP.NET Identity, this includes requirements of confirmed userprofile upon logging in. 
 * Addition of MVC services to handle web-API and views. 
 * Configuration of the HTTP pipeline, this includes error handling, usage of HTTPS, static files, routing, authentication and authorization.
 * Mapping of standard and customized control routes for the application. 
