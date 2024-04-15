@@ -53,8 +53,8 @@ AspnetWwstyleContext.cs: Defines the database model and configuration for the En
 ApplicationDbContext.cs: Purpose is to get data access in an ASP.NET application with identity functionality. It inherits from IdentityDbContext which includes authentication and user handling tables. The constructor receives settings for the DbContext.   
 
 ### Classes
-Product.cs: Represent a product entity with properties such as ProductId, ProductName, Description and Price.
-Comment.cs: Serves as a comment class with properties that are id for comments, products, users, text, date of creation and navigation properties for products and users.
+* Product.cs: Represent a product entity with properties such as ProductId, ProductName, Description and Price.
+* Comment.cs: Serves as a comment class with properties that are id for comments, products, users, text, date of creation and navigation properties for products and users.
 Customer.cs: Produces a customer with properties that includes id for customer, first name, last name, addresses, city, state, zipcode and country. There are also properties such as the customers phone number, email and a navigation property associated with users. There is a collection of orders and shopping carts. 
 Order.cs: Shows an order with properties like order id, customer id, total amount, date of ordering, status and navigation properties for an associated customer and a collection of order details that represents the details for each entry of the order.
 OrderDetail.cs: Enact as a detailed entry for an order. It includes fields for order id, belonging orders id, product id, quantity and price per unit. Additionally it contains navigation properties to the associated order and specific product that the order contains.
