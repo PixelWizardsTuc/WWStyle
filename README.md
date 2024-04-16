@@ -61,8 +61,12 @@ Press “Submit” to add your comment. The comment will stay on the detail site
 * Index(): Shows the applications main page and logs different messages that are errors, warnings and information to track the applications state.
 * Privacy(): Returns a view that shows the application's privacy policy. 
 * Error(): Shows an error-handling page and uses the ErrorViewModel to show relevant error information. The ResponseCache attribute is set to not cache in order to make sure that the error message is always contemporary.
-* ProductController.cs: Handles HTTP-requests for the product site, including measures to show detailed product details.
+* ProductController.cs: Regulates HTTP-requests for the product site, including measures to show detailed product details.
+* AdminCustomerController.cs: Operates CRUD operations (create, read, update, delete) for customers in the application.
+* AdminProductController.cs: Runs CRUD operations for products in the application. Such as add, list, edit and delete.
+* CustomerController.cs: Maintaining operations related to users in the application. Including showing information, geting details, confirming deleting of users in the application.
 
+  
 ### Context
 
 * AspnetWwstyleContext.cs: Defines the database model and configuration for the Entity Framework Core context.
