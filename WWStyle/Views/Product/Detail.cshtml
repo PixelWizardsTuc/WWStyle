@@ -11,7 +11,6 @@
                         <div class="small mb-1">Id: @Model.ProductId</div>
                         <h1 class="display-5 fw-bolder">@Model.ProductName</h1>
                         <div class="fs-5 mb-5">
-                     @*        <span class="text-decoration-line-through">@Model.Price</span> *@
                             <span>$@Model.Price</span>
                         </div>
                         <p class="lead">@Model.Description</p>
@@ -39,58 +38,40 @@
 </button>
 
 
-@if (Model.Comments != null && Model.Comments.Any())
+
+<h3>Comments</h3>
+@if (Model.Comments.Any())
 {
-    <h3>Comments</h3>
-    <div id="comments">
-        @{
-            await Html.RenderPartialAsync("_Comments", Model.Comments);
-        }
-    </div>
+    foreach (var comment in Model.Comments)
+    {
+        <div>
+            @if (comment != null)
+            {
+                <small> <strong>Comment:</strong> @comment.Text | <strong>Date:</strong> @(comment.CreateDate != null ? comment.CreateDate.ToString("dd/MM/yyyy") : "Unknown")</small>
+            }
+            else
+            {
+                <small>Unknown User</small> 
+            }
+        </div>
+    }
 }
 else
 {
-    <p>No comments yet.</p>
+    <p>No comments available.</p>
 }
 
-<!-- Formulär för att lägga till en ny kommentar -->
-<h3>Add a comment</h3>
-<form style="margin-bottom: 100px" id="commentForm" method="post" action="/Product/AddComment">
-    @Html.AntiForgeryToken()
+<form method="post" action="/Product/AddComment" style="margin-bottom: 100px">
     <input type="hidden" name="productId" value="@Model.ProductId" />
     <div class="form-group">
-        <label for="userName">Name:</label>
-        <input type="text" id="userName" name="userName" class="form-control" required />
+        <label for="comment">Your Comment:</label>
+        <textarea class="form-control" id="comment" name="text" rows="3" required></textarea>
     </div>
-    <div class="form-group">
-        <label for="commentText">Comment:</label>
-        <textarea id="commentText" name="commentText" class="form-control" rows="3" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-outline-dark flex-shrink-0">
+    <button type="submit" class="btn btn-outline-dark flex-shrink-0" style="margin-top:10px;">
         <i class="bi bi-send-check"></i>
-        Submit
-    </button>
+        Submit</button>
 </form>
 
-<!-- Skript för att ladda om sidan efter att en ny kommentar har lagts till -->
-<script>
-    // Lyssna på formulärinskickning
-    $('#commentForm').submit(function (event) {
-        event.preventDefault(); // Förhindra standardformulärinskickning
 
-        // Skicka formulärdata med AJAX
-        $.ajax({
-            url: $(this).attr('action'),
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                // Ladda om sidan efter att kommentaren har lagts till
-                location.reload();
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    });
-</script>
+
 

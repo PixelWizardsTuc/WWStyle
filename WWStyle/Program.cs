@@ -63,6 +63,11 @@ app.MapControllerRoute(
     name: "adminProductEditProduct",
     pattern: "{controller=AdminProduct}/{action=EditProduct}/{id?}");
 
+app.MapControllerRoute(
+    name: "comment",
+    pattern: "Product/AddComment",
+    defaults: new { controller = "Product", action = "AddComment" });
+
 app.MapRazorPages();
 
 app.Run();

@@ -4,6 +4,8 @@ using WWStyle.Data;
 using WWStyle.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace WWStyle.Controllers
 {
@@ -11,7 +13,6 @@ namespace WWStyle.Controllers
     {
         private readonly AspnetWwstyleContext _context;
         private readonly ApplicationDbContext _appContext;
-
 
         public ProductController(AspnetWwstyleContext context, ApplicationDbContext appContext)
         {
@@ -26,82 +27,75 @@ namespace WWStyle.Controllers
 
         }
 
-        //public IActionResult Details(int id)
-        //{
-        //    Product product = _context.Products.Include(p => p.ProductName).FirstOrDefault(i => i.ProductId == id);
-        //    return View(product);
-        //}
-
-		//public async Task<IActionResult> ProductDetail(int? id, string alertstyle = "success")
-		//{
-		//	ViewData["alertstyle"] = alertstyle;
-
-		//	if (!id.HasValue)
-		//	{
-		//		return BadRequest("You must pass a product ID in the route, " +
-		//			"for example, /Home/ProductDetail/13");
-		//	}
-		//	Product? model = await _context.Products.SingleOrDefaultAsync(p => p.ProductId == id);
-		//	if (model is null)
-		//	{
-		//		return NotFound($"ProductId {id} not found.");
-		//	}
-		//	return View(model);
-		//}
 
         public IActionResult Detail(int id)
         {
-            var product = _context.Products.FirstOrDefault(p => p.ProductId == id);
+            var productWithComments = _context.Products
+                .Include(p => p.Comments) // Inkludera kommentarerna för produkten
+                .FirstOrDefault(p => p.ProductId == id);
+
+            if (productWithComments == null)
+            {
+                return NotFound();
+            }
+
+            return View(productWithComments);
+        }
+
+
+        public bool ValidateUserId(string userId)
+        {
+            // Check if the user ID is empty or null
+            if (string.IsNullOrEmpty(userId))
+            {
+                return false;
+            }
+
+            // Check if the user ID exists in the database
+            // Replace `AspNetUser` with your actual user table name
+            using (var context = new AspnetWwstyleContext())
+            {
+                return context.AspNetUsers.Any(u => u.Id == userId);
+            }
+        }
+
+        [HttpPost]
+        [Authorize] // Kräver att användaren är inloggad för att lägga till kommentar
+        public async Task<IActionResult> AddComment(int productId, string text)
+        {
+            var product = await _context.Products.FindAsync(productId);
             if (product == null)
             {
                 return NotFound();
             }
-            return View(product);
-        }
 
-        //private AspNetUser GetUserById(string userId)
-        //{
-        //    // Hämta användaren från _appContext-databasen
-        //    var user = _appContext.Users.FirstOrDefault(u => u.Id == userId);
-
-        //    return user;
-        //}
-
-        [HttpPost]
-        public IActionResult AddComment(int productId, string userName, string commentText)
-        {
-            // Hämta produkten från databasen
-            var product = _context.Products.Include(p => p.Comments).FirstOrDefault(p => p.ProductId == productId);
-
-            if (product != null)
+            // Hämta användarens ID från ASP.NET Identity
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
             {
-                // Skapa en ny kommentar
-                var comment = new Comment
-                {
-                    UserId = userName,
-                    Text = commentText,
-                    CreateDate = DateTime.Now
-                };
-
-                // Lägg till kommentaren till produktens kommentarer
-                product.Comments.Add(comment);
-
-                // Spara ändringarna till databasen
-                _appContext.SaveChanges();
-                _context.SaveChanges();
-
-                // Omdirigera tillbaka till produktsidan
-                return RedirectToAction("Detail", new { id = productId });
+                return Unauthorized(); // Användaren är inte inloggad
             }
 
-            return NotFound();
-        }
+            // Kontrollera om användaren finns i systemet (validera användar-ID)
+            var user = await _context.AspNetUsers.FindAsync(userId);
+            if (user == null)
+            {
+                return Unauthorized(); // Användaren är inte giltig
+            }
 
-        // Andra action-metoder för att hantera skapande, redigering och borttagning av produkter
-        // Exempelvis:
-        // public IActionResult Create()
-        // public IActionResult Edit(int id)
-        // public IActionResult Delete(int id)
-        // public IActionResult Save(Product product)
+            // Skapa kommentarobjektet och lägg till i databasen
+            var comment = new Comment
+            {
+                ProductId = productId,
+                UserId = userId,
+                Text = text,
+                CreateDate = DateTime.Now
+            };
+
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Detail", new { id = productId });
+        }
     }
 }
