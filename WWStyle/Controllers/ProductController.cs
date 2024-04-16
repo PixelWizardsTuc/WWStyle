@@ -67,35 +67,35 @@ namespace WWStyle.Controllers
         //    return user;
         //}
 
-        //[HttpPost]
-        //public IActionResult AddComment(int productId, string userName, string commentText)
-        //{
-        //    // Hämta produkten från databasen
-        //    var product = _context.Products.Include(p => p.Comments).FirstOrDefault(p => p.ProductId == productId);
+        [HttpPost]
+        public IActionResult AddComment(int productId, string userName, string commentText)
+        {
+            // Hämta produkten från databasen
+            var product = _context.Products.Include(p => p.Comments).FirstOrDefault(p => p.ProductId == productId);
 
-        //    if (product != null)
-        //    {
-        //        // Skapa en ny kommentar
-        //        var comment = new Comment
-        //        {
-        //            UserId = HttpContext.User.Identity.GetUserId(),
-        //            Text = commentText,
-        //            CreateDate = DateTime.Now
-        //        };
+            if (product != null)
+            {
+                // Skapa en ny kommentar
+                var comment = new Comment
+                {
+                    UserId = userName,
+                    Text = commentText,
+                    CreateDate = DateTime.Now
+                };
 
-        //        // Lägg till kommentaren till produktens kommentarer
-        //        product.Comments.Add(comment);
+                // Lägg till kommentaren till produktens kommentarer
+                product.Comments.Add(comment);
 
-        //        // Spara ändringarna till databasen
-        //        _appContext.SaveChanges();
-        //        _context.SaveChanges();
+                // Spara ändringarna till databasen
+                _appContext.SaveChanges();
+                _context.SaveChanges();
 
-        //        // Omdirigera tillbaka till produktsidan
-        //        return RedirectToAction("Detail", new { id = productId });
-        //    }
+                // Omdirigera tillbaka till produktsidan
+                return RedirectToAction("Detail", new { id = productId });
+            }
 
-        //    return NotFound();
-        //}
+            return NotFound();
+        }
 
         // Andra action-metoder för att hantera skapande, redigering och borttagning av produkter
         // Exempelvis:
