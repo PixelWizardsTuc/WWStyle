@@ -43,7 +43,7 @@
         <div>
             @if (comment != null)
             {
-                <small> Comment: @comment.Text | Date: @(comment.CreateDate != null ? comment.CreateDate.ToString("dd/MM/yyyy") : "Unknown")</small>
+                <small> <strong>Comment:</strong> @comment.Text | <strong>Date:</strong> @(comment.CreateDate != null ? comment.CreateDate.ToString("dd/MM/yyyy") : "Unknown")</small>
             }
             else
             {
