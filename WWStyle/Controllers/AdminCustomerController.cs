@@ -40,8 +40,6 @@ namespace WWStyle.Controllers
             await dbContext.SaveChangesAsync();
             return RedirectToAction("List", "AdminCustomer");
         }
-
-        //Stämma av med Karin angående att ändra till int för customer id
        
         [HttpGet]
         public async Task<IActionResult> List()

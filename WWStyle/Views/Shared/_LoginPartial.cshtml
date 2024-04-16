@@ -17,7 +17,14 @@
 else
 {
     <li class="nav-item d-flex align-items-center">
-            <i class="bi bi-cart3 h4" style="margin-bottom:0; margin-right: 0.5rem; -webkit-text-stroke: 1px"></i>
+        <a class="nav-link text-dark"asp-controller="ShoppingCart" asp-action="Index">
+                <i class="bi bi-cart3 h4" style="margin-bottom:0; margin-right: 0.5rem; -webkit-text-stroke: 1px">
+                    @if(ViewBag.CartItemCount > 0)
+                    {
+                        <span class="badge badge-pill badge-danger">@ViewBag.CartItemCount</span>
+                    }
+                </i>
+            </a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>

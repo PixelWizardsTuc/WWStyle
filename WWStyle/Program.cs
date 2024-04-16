@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using WWStyle;
 using WWStyle.Data;
+using WWStyle.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,12 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AspnetWwstyleContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ProductRepository>(); 
+builder.Services.AddScoped<ShoppingCartRepository>();
+
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ShoppingCartService>();
 
 var app = builder.Build();
 
