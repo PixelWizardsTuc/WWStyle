@@ -1,30 +1,30 @@
 # Walking With Style
 
-# KRAV
-Fokuser på att få de grundläggande funktionalitet i uppgiften mer än på hur många sidor blir det i slutet. 
-Att ni har ett admin och en vanlig användare. Kundregister där alla kan se lista av kunder medan admin kan 
-redigera och lägga till kund. En produktkatalog med minst ett bild, beskrivning och pris, varukorg, orderhisprik. 
-Bara admin kan hantera produkter. En kommentarsfunktion för produker för inloggad användare. 
-Jag forsökte korta ner de viktiga delar, hoppas att det hjälper.
-
 # Documentation: Walking With Style E-commerce Platform
 
 ## Requirements Specification
 
-The application Walking With Style is an e-commerce platform that's purpose is to let users show products, add them to a shopping cart and leave comments on the products. Requirements for this application is:
+The application Walking With Style is an e-commerce platform that's purpose is to let users show products, 
+add them to a shopping cart and leave comments on the products. Requirements for this application is:
 Possibility for users to browse through products and show detailed information of each product.
 Functionality for users to add products to a shopping cart.
 Opportunity for users to add a comment about the products and share their opinions and experiences with other users.
 Functionality to make sure only admins can edit products.
 
+However all of these functions are not fully working in the projects current state. There are improvements for most parts that 
+can still be made but especially for the admin and the shoppingcart functionality. Including deleting customers/users 
+and adding stuff to the shoppingcart.
+
 ## System architecture
 
-This application is built with ASP.NET MVC-framework and uses Entity Framework Core for database management. The following is an overview of the system architecture:
+This application is built with ASP.NET MVC-framework and uses Entity Framework Core for database management. 
+The following is an overview of the system architecture:
 Model: Representing the data structure for the application, including entities like products, comments and shopping carts. 
 View: Handles the user interface and shows information to the users. Using Razor-syntax to mix HTML with C# code to render dynamic contents.
 Controller: Handles user interaction and acts like middleware between the model and view. Contains measures to handle HTTP-requests to perform business logic.
 
-The database is implemented with an SQL Server-database which stores information about products, comments and shopping carts. Entity Framework Core is used to interact with the database and perform CRUD-operations. 
+The database is implemented with an SQL Server-database which stores information about products, comments, users and shopping carts. 
+Entity Framework Core is used to interact with the database and perform CRUD-operations. 
 
 ## User documentation
 
