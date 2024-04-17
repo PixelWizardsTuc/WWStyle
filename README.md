@@ -11,9 +11,13 @@ Functionality for users to add products to a shopping cart.
 Opportunity for users to add a comment about the products and share their opinions and experiences with other users.
 Functionality to make sure only admins can edit products.
 
-However all of these functions are not fully working in the projects current state. There are improvements for most parts that 
-can still be made but especially for the admin and the shoppingcart functionality. Including deleting customers/users 
-and adding stuff to the shoppingcart.
+At the time of this assignments deadline there are some functions that are not fully operational due to difficulties we have had with our database. Making modifications to the content of the database has been unsuccessful and trying to perform migrations resulted in Entity Framework thinking that we want to re-create the database each time a migration is made. Since there already is models and data in the database, the migrations stops itself before creating duplicates of the tables. The outcome of it is that we end up with half-done migrations that has to be manually removed and if possible, having to perform the action via SQL queries instead which isn't always the case. 
+
+There are improvements to be made and had the project worked as well as we hoped, we would have added: 
+
+Admin:  Added functionality to log in as admin and have access to advanced settings that customers doesn't have access too. The current build has an admin-dropdown with CRUD-operations for handling customers and product, however the menu is visible for everybody that visits the page and the CRUD-operations for the customers isn't functioning. 
+
+Shoppingcart: We wanted to add a function where a number was displayed next to the shoppingcart-icon. With the limitations from the database and not accounting in that guest users also should be able to add products to the car, we were unable to implement this function. How we set up the relations in our database made it so each cart is connected to a CustomerId and us trying to disable this for testing meant that we had to make changes to the database which wasn't a possibility (as mentioned before).
 
 ## System architecture
 
