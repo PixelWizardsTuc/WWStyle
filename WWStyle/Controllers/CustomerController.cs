@@ -17,7 +17,6 @@ namespace WWStyle.Controllers
 
         public IActionResult Index()
         {
-            // Hämta en lista med användare från din databas
             var users = _context.AspNetUsers.ToList();
 
             return View(users);
@@ -25,7 +24,6 @@ namespace WWStyle.Controllers
 
         public IActionResult Detail(string id)
         {
-            // Hämta en specifik användare från databasen baserat på ID
             var user = _context.AspNetUsers.FirstOrDefault(u => u.Id == id);
 
             if (user == null)

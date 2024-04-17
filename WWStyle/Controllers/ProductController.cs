@@ -31,7 +31,7 @@ namespace WWStyle.Controllers
         public IActionResult Detail(int id)
         {
             var productWithComments = _context.Products
-                .Include(p => p.Comments) // Inkludera kommentarerna för produkten
+                .Include(p => p.Comments) 
                 .FirstOrDefault(p => p.ProductId == id);
 
             if (productWithComments == null)
@@ -45,14 +45,11 @@ namespace WWStyle.Controllers
 
         public bool ValidateUserId(string userId)
         {
-            // Check if the user ID is empty or null
             if (string.IsNullOrEmpty(userId))
             {
                 return false;
             }
 
-            // Check if the user ID exists in the database
-            // Replace `AspNetUser` with your actual user table name
             using (var context = new AspnetWwstyleContext())
             {
                 return context.AspNetUsers.Any(u => u.Id == userId);
@@ -60,7 +57,7 @@ namespace WWStyle.Controllers
         }
 
         [HttpPost]
-        [Authorize] // Kräver att användaren är inloggad för att lägga till kommentar
+        [Authorize] 
         public async Task<IActionResult> AddComment(int productId, string text)
         {
             var product = await _context.Products.FindAsync(productId);
@@ -69,21 +66,18 @@ namespace WWStyle.Controllers
                 return NotFound();
             }
 
-            // Hämta användarens ID från ASP.NET Identity
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return Unauthorized(); // Användaren är inte inloggad
+                return Unauthorized(); 
             }
 
-            // Kontrollera om användaren finns i systemet (validera användar-ID)
             var user = await _context.AspNetUsers.FindAsync(userId);
             if (user == null)
             {
-                return Unauthorized(); // Användaren är inte giltig
+                return Unauthorized(); 
             }
 
-            // Skapa kommentarobjektet och lägg till i databasen
             var comment = new Comment
             {
                 ProductId = productId,
