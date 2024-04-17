@@ -52,38 +52,38 @@ namespace WWStyle.Controllers
 
         public async Task<IActionResult> Edit(int id, Customer viewModel)
         {
-            
+            if (ModelState.IsValid)
+            {
+
                 var customer = await dbContext.Customers.FindAsync(id);
+                if (customer == null)
+                {
+                    ModelState.AddModelError("", "Customer not found.");
+                    return View(viewModel);
+                }
 
                 if (viewModel != null)
                 {
                     customer.FirstName = viewModel.FirstName;
                     customer.LastName = viewModel.LastName;
                     customer.Address1 = viewModel.Address1;
-                    customer.Address2 = viewModel.Address2;
-                    customer.City = viewModel.City;
-                    customer.State = viewModel.State;
-                    customer.ZipCode = viewModel.ZipCode;
-                    customer.Country = viewModel.Country;
-                    customer.Phone = viewModel.Phone;
-                    customer.Email = viewModel.Email;
-
                     await dbContext.SaveChangesAsync();
                     return RedirectToAction("List", "AdminCustomer");
                 }
-            
-
+                else
+                {
+                    ModelState.AddModelError("", "Invalid customer data.");
+                }
+            }
             var existingCustomer = await dbContext.Customers.FindAsync(id);
             if (existingCustomer == null)
             {
                 ModelState.AddModelError("", "Customer not found.");
                 return NotFound();
             }
-
             return View(existingCustomer);
         }
-
-        [HttpPost]
+            [HttpPost]
         public async Task<IActionResult> Delete(Customer viewModel)
         {
             var customer = await dbContext.Customers

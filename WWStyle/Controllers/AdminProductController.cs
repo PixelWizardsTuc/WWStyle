@@ -29,15 +29,13 @@ namespace WWStyle.Controllers
                 Description = addProductViewModel.Description,
                 Price = addProductViewModel.Price,
                 Stock = addProductViewModel.Stock,
-
             };
-
             await dbContext.Products.AddAsync(product);
             await dbContext.SaveChangesAsync();
             return RedirectToAction("List", "AdminProduct");
         }
 
-       
+
         [HttpGet]
         public async Task<IActionResult> List()
         {
@@ -46,21 +44,31 @@ namespace WWStyle.Controllers
             return View(products);
         }
 
-
         public async Task<IActionResult> Edit(int id, Product viewModel)
         {
+            if (ModelState.IsValid)
+            {
                 var product = await dbContext.Products.FindAsync(id);
+                if (product == null)
+                {
+                    ModelState.AddModelError("", "Product not found.");
+                    return View(viewModel);
+                }
 
                 if (viewModel != null)
                 {
                     product.ProductName = viewModel.ProductName;
                     product.Description = viewModel.Description;
                     product.Price = viewModel.Price;
-                    product.Stock = viewModel.Stock;
 
                     await dbContext.SaveChangesAsync();
                     return RedirectToAction("List", "AdminProduct");
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid product data.");
+                }
+            }
 
             var existingProduct = await dbContext.Products.FindAsync(id);
             if (existingProduct == null)
@@ -68,7 +76,6 @@ namespace WWStyle.Controllers
                 ModelState.AddModelError("", "Product not found.");
                 return NotFound();
             }
-
             return View(existingProduct);
         }
 
@@ -78,8 +85,7 @@ namespace WWStyle.Controllers
             var product = await dbContext.Products
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.ProductId == viewModel.ProductId);
-
-            if(product is not null)
+            if (product is not null)
             {
                 dbContext.Products.Remove(product);
                 await dbContext.SaveChangesAsync();
@@ -87,5 +93,6 @@ namespace WWStyle.Controllers
 
             return RedirectToAction("List", "AdminProduct");
         }
+
     }
 }
