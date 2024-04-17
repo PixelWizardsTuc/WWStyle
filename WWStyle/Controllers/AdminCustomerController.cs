@@ -52,18 +52,11 @@ namespace WWStyle.Controllers
 
         public async Task<IActionResult> Edit(int id, Customer viewModel)
         {
-            if (ModelState.IsValid)
-            {
+            
                 var customer = await dbContext.Customers.FindAsync(id);
-                if (customer == null)
-                {
-                    ModelState.AddModelError("", "Product not found.");
-                    return View(viewModel);
-                }
 
                 if (viewModel != null)
                 {
-                    // Update the product with the values from viewModel
                     customer.FirstName = viewModel.FirstName;
                     customer.LastName = viewModel.LastName;
                     customer.Address1 = viewModel.Address1;
@@ -78,17 +71,12 @@ namespace WWStyle.Controllers
                     await dbContext.SaveChangesAsync();
                     return RedirectToAction("List", "AdminCustomer");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid product data.");
-                }
-            }
+            
 
-            // Fetch the product data from the database and pass it to the view
-            var existingCustomer = await dbContext.Products.FindAsync(id);
+            var existingCustomer = await dbContext.Customers.FindAsync(id);
             if (existingCustomer == null)
             {
-                ModelState.AddModelError("", "Product not found.");
+                ModelState.AddModelError("", "Customer not found.");
                 return NotFound();
             }
 

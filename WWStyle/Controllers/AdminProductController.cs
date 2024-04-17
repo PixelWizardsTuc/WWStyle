@@ -49,18 +49,10 @@ namespace WWStyle.Controllers
 
         public async Task<IActionResult> Edit(int id, Product viewModel)
         {
-            if (ModelState.IsValid)
-            {
                 var product = await dbContext.Products.FindAsync(id);
-                if (product == null)
-                {
-                    ModelState.AddModelError("", "Product not found.");
-                    return View(viewModel);
-                }
 
                 if (viewModel != null)
                 {
-                    // Update the product with the values from viewModel
                     product.ProductName = viewModel.ProductName;
                     product.Description = viewModel.Description;
                     product.Price = viewModel.Price;
@@ -69,13 +61,7 @@ namespace WWStyle.Controllers
                     await dbContext.SaveChangesAsync();
                     return RedirectToAction("List", "AdminProduct");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid product data.");
-                }
-            }
 
-            // Fetch the product data from the database and pass it to the view
             var existingProduct = await dbContext.Products.FindAsync(id);
             if (existingProduct == null)
             {
